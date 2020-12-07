@@ -106,7 +106,43 @@
   </div>
   <script src="./lib/bootstrap/js/jquery-1.12.4.js"></script>
   <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+<script>
+//  入口函数
+ $(function(){
+  //  登录按钮设置点击事件
+   $('.btn-success').on('click',function(e){
+     e.preventDefault();
+    //  获取输入值
+    let userName=$('#username').val().trim();
+    let passWord=$('#password').val().trim();
+    // 非空判断
+    if(userName==''||passWord==''){
+      alert('输入有误');
+      return;
+    }
+    // 发送AJAX请求
+    $.ajax({
+      type:'post',
+      url:'http://localhost:4399/user/login',
+      data:{
+        username:userName,
+        password:passWord,
+      },
+      success:function(backData){
+        if(backData.code==200){
+          alert('登录成功');
+          window.location.href='./index.html'
+        }else{
+          alert('用户名或密码不正确')
+        }
 
+
+      }
+    })
+
+   })
+ })
+</script>
     
 
 
